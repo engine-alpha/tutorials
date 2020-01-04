@@ -9,13 +9,13 @@ So sind die Tutorials zu benutzen
 --------------------
 
 Die Tutorials werden schrittweise erläutert auf der Engine-Alpha-Tutorialseite
-(http://engine-alpha.org/tutorials). Wer den Umgang mit der Engine lernen möchte, sollte dort starten.
+(http://engine-alpha.org/wiki/Tutorials/Version_4). Wer den Umgang mit der Engine lernen möchte, sollte dort starten.
 
 
 Repository-Struktur 
 --------------------
 
-Im Verzeichnis `src/tutorials` sind alle Beispiele in einem eigenen Unterverzeichnis angelegt. 
+Im Verzeichnis `src/eaeatutorials` sind alle Beispiele in einem eigenen Unterverzeichnis angelegt. 
 Der Code in jedem Verzeichnis ist unabhängig vom Rest der Files ausführbar.
 
 
