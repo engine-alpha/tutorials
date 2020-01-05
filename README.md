@@ -8,8 +8,12 @@ Die Dateien hierin sind im Regelfall funktionierende Beispiele.
 So sind die Tutorials zu benutzen
 --------------------
 
-Die Tutorials werden schrittweise erläutert auf der Engine-Alpha-Tutorialseite
-(http://engine-alpha.org/wiki/Tutorials/Version_4). Wer den Umgang mit der Engine lernen möchte, sollte dort starten.
+Die Tutorials werden schrittweise erläutert auf der 
+[Engine-Alpha-Tutorialseite](https://engine-alpha.org/wiki/v4.x/Tutorials). 
+Wer den Umgang mit der Engine lernen möchte, sollte dort starten.
+
+Die Tutorials sind unkommentiert. Sie wurden konzipiert, um auch ohne Kommentare nachvollziehbar zu
+sein und sollen stattdessen eher zum eigenen, konzentrierten Nachvollziehen anregen.
 
 
 Repository-Struktur 
