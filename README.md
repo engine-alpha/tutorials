@@ -1,7 +1,7 @@
 Engine Alpha Tutorials
 ==================
 
-Dieses Repository enthält die Quellen zu allen **einfachen** Tutorials für die Engine.
+Dieses Repository enthält die Quellen zu allen einfachen Tutorials für die Engine.
 Die Dateien hierin sind im Regelfall funktionierende Beispiele.
 
 
@@ -15,7 +15,7 @@ Die Tutorials werden schrittweise erläutert auf der Engine-Alpha-Tutorialseite
 Repository-Struktur 
 --------------------
 
-Im Verzeichnis `src/eaeatutorials` sind alle Beispiele in einem eigenen Unterverzeichnis angelegt. 
+Im Verzeichnis `src/eatutorials` sind alle Beispiele in einem eigenen Unterverzeichnis angelegt. 
 Der Code in jedem Verzeichnis ist unabhängig vom Rest der Files ausführbar.
 
 
