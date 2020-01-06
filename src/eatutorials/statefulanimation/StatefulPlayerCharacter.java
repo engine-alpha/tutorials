@@ -21,8 +21,8 @@ implements KeyListener, FrameUpdateListener {
     private static final float WALKING_THRESHOLD = 1;
 
     private static final Float MAX_SPEED = 20f;
-    private static final Float ACC_TIME = 1.5f;
-    private static final Float DEC_TIME = 0.8f;
+    private static final float FORCE = 16000;
+    private static final float JUMP_IMPULSE = 1100;
 
     private KeyFrames currentMovement = null;
 
@@ -50,6 +50,8 @@ implements KeyListener, FrameUpdateListener {
         setBodyType(BodyType.DYNAMIC);
         setRotationLocked(true);
         setRestitution(0);
+        setFriction(30f);
+        setLinearDamping(.3f);
     }
 
     @Override
@@ -58,24 +60,6 @@ implements KeyListener, FrameUpdateListener {
             case KeyEvent.VK_SPACE:
                 attemptJump();
                 break;
-            case KeyEvent.VK_A:
-                initiateMovement(false);
-                break;
-            case KeyEvent.VK_D:
-                initiateMovement(true);
-                break;
-        }
-    }
-
-    @Override
-    public void onKeyUp(KeyEvent keyEvent) {
-        switch (keyEvent.getKeyCode()) {
-            case KeyEvent.VK_A:
-                stopMovement();
-                break;
-            case KeyEvent.VK_D:
-                stopMovement();
-                break;
         }
     }
 
@@ -83,7 +67,7 @@ implements KeyListener, FrameUpdateListener {
         PlayerState state = getCurrentState();
         if(state == PlayerState.IDLE || state == PlayerState.WALKING || state == PlayerState.RUNNING) {
             if(isGrounded()) {
-                applyImpulse(new Vector(0, 850));
+                applyImpulse(new Vector(0, JUMP_IMPULSE));
                 setState(PlayerState.JUMPING);
             }
         }
@@ -111,6 +95,16 @@ implements KeyListener, FrameUpdateListener {
             setState(PlayerState.LANDING);
         }
 
+        if(Math.abs(velocity.getX()) > MAX_SPEED) {
+            setVelocity(new Vector(Math.signum(velocity.getX()) * MAX_SPEED, velocity.getY()));
+        }
+
+        if(Game.isKeyPressed(KeyEvent.VK_A)) {
+            applyForce(new Vector(-FORCE, 0));
+        } else if(Game.isKeyPressed(KeyEvent.VK_D)) {
+            applyForce(new Vector(FORCE, 0));
+        }
+
         if(state == PlayerState.IDLE || state == PlayerState.WALKING || state == PlayerState.RUNNING) {
             float velXTotal = Math.abs(velocity.getX());
             if(velXTotal > RUNNING_THRESHOLD) {
@@ -127,32 +121,5 @@ implements KeyListener, FrameUpdateListener {
         } else if(velocity.getX() < 0) {
             setFlipHorizontal(true);
         }
-    }
-
-    private void initiateMovement(boolean toTheRight) {
-        KeyFrames movementSpeed = new KeyFrames((speed) -> setVelocity(new Vector(speed, getVelocity().getY())));
-        movementSpeed.addKeyframe(new KeyFrame<>(getVelocity().getX(), KeyFrame.Type.LINEAR, 0));
-        movementSpeed.addKeyframe(new KeyFrame<>(MAX_SPEED * (toTheRight ? 1 : -1), KeyFrame.Type.SMOOTHED_SIN, ACC_TIME));
-        movementSpeed.setInifinite(true);
-        setNewMovement(movementSpeed);
-    }
-
-    private void stopMovement() {
-        if(Game.isKeyPressed(KeyEvent.VK_A) || Game.isKeyPressed(KeyEvent.VK_D)) {
-            return;
-        }
-        KeyFrames movementSpeed = new KeyFrames((speed) -> setVelocity(new Vector(speed, getVelocity().getY())));
-        movementSpeed.addKeyframe(new KeyFrame<>(getVelocity().getX(), KeyFrame.Type.SMOOTHED_SIN, 0));
-        movementSpeed.addKeyframe(new KeyFrame<>(0f, KeyFrame.Type.SMOOTHED_SIN, DEC_TIME));
-        movementSpeed.setInifinite(false);
-        setNewMovement(movementSpeed);
-    }
-
-    private void setNewMovement(KeyFrames movementInterpolation) {
-        if(currentMovement != null) {
-            removeFrameUpdateListener(currentMovement);
-        }
-        currentMovement = movementInterpolation;
-        addFrameUpdateListener(movementInterpolation);
     }
 }
