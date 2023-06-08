@@ -42,8 +42,8 @@ implements FrameUpdateListener{
     }
 
     public void placeRandomGoodie() {
-        float x = Random.nextFloat()*10 - 5;
-        float y = Random.nextFloat()*10 - 5;
+        float x = Random.range()*10 - 5;
+        float y = Random.range()*10 - 5;
         Goodie goodie = new Goodie();
         goodie.setCenter(x, y);
         add(goodie);
