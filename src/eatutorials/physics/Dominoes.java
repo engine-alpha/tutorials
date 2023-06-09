@@ -86,7 +86,7 @@ public class Dominoes extends Scene implements FrameUpdateListener, MouseClickLi
 
     @Override
     public void onMouseDown(Vector position, MouseButton button) {
-        Vector impulse = ball.getCenter().getDistance(position).multiply(10);
+        Vector impulse = ball.getCenter().getDistance(position).multiply(5);
         ball.applyImpulse(impulse);
     }
 }
